@@ -1,0 +1,22 @@
+{
+  "name": "vitmav42_hf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fazakaserik/vitmav42_hf.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fazakaserik/vitmav42_hf/issues"
+  },
+  "homepage": "https://github.com/fazakaserik/vitmav42_hf#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}

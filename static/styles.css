@@ -1,0 +1,12 @@
+body {
+    background-image: url(resources/greece_sea.jpeg)
+}
+
+.container {
+    margin-top: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px;
+    background-color: aliceblue;
+}
