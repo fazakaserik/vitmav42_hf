@@ -9,7 +9,11 @@
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <title>News</title>
+        <!-- Bundle for calendar -->
+        <link href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.css' rel='stylesheet'>
+        <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
+
+        <title>All Reservations</title>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -20,10 +24,10 @@
           
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="news.html">News<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                   <a class="nav-link" href="profile.html">Profile</a>
                 </li>
                 <li class="nav-item">
@@ -49,14 +53,40 @@
           </nav>
 
         <div class="container">
-          <div class="article">
-            <h1>First Article</h1>
-            This is an example article which will be better looking and organized.
-          </div>
-          <div class="article">
-            <h1>Second Article</h1>
-            This is another example article which will be better looking and organized.
-          </div>
+          (This will be a JS calendar...)
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">2022</th>
+                <th scope="col">September</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>
+                  <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="resources/beaches/greece_beach2.jpg" alt="greek beach">
+                    <div class="card-body">
+                      <h5 class="card-title">Erik Fazakas</h5>
+                      <p class="card-text">erik.fazakas@kuka.com</p>
+                      <a href="#" class="btn btn-primary">Contact</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- Optional JavaScript -->
