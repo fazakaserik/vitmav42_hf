@@ -1,6 +1,9 @@
 body {
-    background: rgb(34,193,195);
-    background: linear-gradient(183deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+    background-image: url("resources/beaches/greece_sea.jpeg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    padding-bottom: 50px;
 }
 
 .container {
@@ -11,10 +14,7 @@ body {
 }
 
 .article {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 20px;
     margin-bottom: 20px;
     box-shadow: 2px 2px 5px;
     background-color:cornsilk;
