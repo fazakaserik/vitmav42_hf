@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <title>Administration</title>
+        <title>Edit User</title>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -49,76 +49,41 @@
           </nav>
 
         <div class="container">
-          <h1>Date Management</h1>
+          <h1>Edit User</h1>
           <form>
-            <div class="form-group">
-              <label for="startDate">Start Date</label>
-              <input type="date" class="form-control" id="startDate" aria-describedby="startDate" value="2023-02-04" min="2022-09-27" max="2024-04-02">
-              <label for="endDate">End Date</label>
-              <input type="date" class="form-control" id="endDate" aria-describedby="endDate" value="2023-04-02" min="2022-09-27" max="2024-04-02">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" value="Erik" id="firstName" placeholder="First name">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" value="Fazakas" id="lastName" placeholder="Last name">
+              </div>
             </div>
-            <a class="btn btn-primary" href="#" role="button">Open</a>
-            <a class="btn btn-danger" href="#" role="button">Close</a>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="email">E-mail</label>
+                <input type="email" class="form-control" value="erik.fazakas@kuka.com" id="email" placeholder="E-mail">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="telNum">Telephone Number</label>
+                <input type="tel" class="form-control" value="+36501227369" id="telNum" placeholder="Telephone number">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="newPassword">Password</label>
+                <input type="password" class="form-control" value="example" id="newPassword" placeholder="New password">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="newPasswordAgain">Repeat Password</label>
+                <input type="password" class="form-control" value="example" id="newPasswordAgain" placeholder="Repeat new password">
+              </div>
+            </div>
+            <a class="btn btn-success" href="administration.html" role="button">Save</a>
+            <a class="btn btn-danger" href="administration.html" role="button">Cancel</a>
           </form>
-        </div>
-
-        <div class="container">
-          <h1>Profile Management</h1>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">E-mail</th>
-                <th scope="col">Phone</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Erik</td>
-                <td>Fazakas</td>
-                <td>erik.fazakas@kuka.com</td>
-                <td>+36501227369</td>
-                <td>
-                  <a class="btn btn-primary" href="administration_edit_user.html" role="button">Edit</a>
-                  <a class="btn btn-danger" href="#" role="button">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Mark</td>
-                <td>Zuckerberg</td>
-                <td>mark.zuckerberg@facebook.com</td>
-                <td>202-555-0166</td>
-                <td>
-                  <a class="btn btn-primary" href="administration_edit_user.html" role="button">Edit</a>
-                  <a class="btn btn-danger" href="#" role="button">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>The</td>
-                <td>Rock</td>
-                <td>the.rock@wwe.com</td>
-                <td>+1-202-555-0166</td>
-                <td>
-                  <a class="btn btn-primary" href="administration_edit_user.html" role="button">Edit</a>
-                  <a class="btn btn-danger" href="#" role="button">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row"></th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><a class="btn btn-success" href="administration_new_user.html" role="button">New</a></td>
-              </tr>
-            </tbody>
-          </table>
         </div>
 
         <!-- Optional JavaScript -->
