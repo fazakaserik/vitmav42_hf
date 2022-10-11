@@ -22,7 +22,7 @@
 | administration_edit_user.html | Edit user form, only for admin user.                     |
 +-------------------------------+----------------------------------------------------------+
 | reservation_all.html          | Lists all reservations.                                  |
-+-------------------------------+----------------------------------------------------------+
+renderMw+-------------------------------+----------------------------------------------------------+
 | reservation_new.html          | Creates a new reservation for the session user.          |
 +-------------------------------+----------------------------------------------------------+
 | reservation_own.html          | List the current session user's reservations.            |
@@ -34,10 +34,10 @@
 
 GET, POST /login           
     checkCredentialsMw (if correct direct to "/")
-    renderMW(index.html)
+    renderMw(index.html)
 
-GET /login/?err=bad_credentials
-    renderMW(index.html) (with the err parameter as a message)
+GET /login/?err=:err_msg
+    renderMw(index.html) (with the err parameter as a message)
 
 GET /           
     directToMw("/news")
@@ -49,7 +49,7 @@ GET /gallery
     authMw
     renderMw(gallery.html)
 
-GET, POST /profile    - profile.html
+GET, POST /profile   
     authMw
     getUserMw
         - Current session user only!
@@ -59,7 +59,7 @@ GET, POST /profile    - profile.html
         - Fill with user's data.
         - Remember the sent form texts.
 
-GET /administration  - administration.html
+GET /administration 
     authMw(admin=true)
     getUsersMw
     renderMw(administration.html)
@@ -125,7 +125,7 @@ middlewares/auth/
     logoutMw.js
 
 middlewares/utils/
-    renderMW.js
+    renderMw.js
     directToMw.js
 
 middlewares/users/
