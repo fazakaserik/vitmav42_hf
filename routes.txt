@@ -54,7 +54,7 @@ GET, POST /profile    - profile.html
     getUserMw
         - Current session user only!
     checkPasswordMatchMw
-    saveProfileMw
+    saveUserMw
     renderMw(profile.html)
         - Fill with user's data.
         - Remember the sent form texts.
@@ -99,7 +99,7 @@ GET, POST /reservations/new
 
 GET /reservations/user/:userid   
     authMw
-    getUserReservationMw
+    getUserReservationsMw
     renderMw(reservation_own.html)
         - With the reservations of the given :userid
         - Render delete button only if it belongs to the session user OR ADMIN.
@@ -108,9 +108,42 @@ GET /reservations/del/:reservationid
     authMw
     checkPermissionMw 
         - Check if the session user is the one who the reservation belongs to OR ADMIN.
-    getUserReservationMw
-    delUserReservationMw
+    getReservationMw
+    delReservationMw
 
 POST /logout
     logoutMw
     directToMw("/")
+
++------------------------+
+| Middleware Path Design |
++------------------------+
+
+middlewares/auth/
+    checkCredentialsMw.js
+    authMw.js
+    logoutMw.js
+
+middlewares/utils/
+    renderMW.js
+    directToMw.js
+
+middlewares/users/
+    getUsersMw.js
+    getUserMw.js
+    saveUserMw.js
+    delUserMw.js
+    checkPasswordMatchMw.js
+    checkPermissionMw.js
+
+middlewares/dates/
+    openDatesMw.js
+    closeDatesMw.js
+
+middlewares/reservations/
+    getReservationsMw.js
+    getUserReservationMw.js
+    getReservationMw.js
+    saveReservationMw.js
+    delReservationMw.js
+    checkIfNotReservedMw.js
