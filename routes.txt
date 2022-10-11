@@ -7,7 +7,7 @@
 +-------------------------------+----------------------------------------------------------+
 | index.html                    | Login form with no menu.                                 |
 +-------------------------------+----------------------------------------------------------+
-| new.html                      | After login, shows the current news articles.            |
+| news.html                      | After login, shows the current news articles.            |
 +-------------------------------+----------------------------------------------------------+
 | gallery.html                  | Gallery which showcases photos.                          |
 +-------------------------------+----------------------------------------------------------+
@@ -19,9 +19,98 @@
 +-------------------------------+----------------------------------------------------------+
 | administration_new_user.html  | New user creation form, only for admin user.             |
 +-------------------------------+----------------------------------------------------------+
+| administration_edit_user.html | Edit user form, only for admin user.                     |
++-------------------------------+----------------------------------------------------------+
 | reservation_all.html          | Lists all reservations.                                  |
 +-------------------------------+----------------------------------------------------------+
 | reservation_new.html          | Creates a new reservation for the session user.          |
 +-------------------------------+----------------------------------------------------------+
 | reservation_own.html          | List the current session user's reservations.            |
 +-------------------------------+----------------------------------------------------------+
+
++------------------------+
+|        Routing         |
++------------------------+
+
+GET, POST /login           
+    checkCredentialsMw (if correct direct to "/")
+    renderMW(index.html)
+
+GET /login/?err=bad_credentials
+    renderMW(index.html) (with the err parameter as a message)
+
+GET /           
+    directToMw("/news")
+GET /news       
+    authMw
+    renderMw(news.html)
+
+GET /gallery    
+    authMw
+    renderMw(gallery.html)
+
+GET, POST /profile    - profile.html
+    authMw
+    getUserMw
+        - Current session user only!
+    checkPasswordMatchMw
+    saveProfileMw
+    renderMw(profile.html)
+        - Fill with user's data.
+        - Remember the sent form texts.
+
+GET /administration  - administration.html
+    authMw(admin=true)
+    getUsersMw
+    renderMw(administration.html)
+GET, POST /administration/edit/user/:userid
+    authMw(admin=true)
+    getUserMw
+    checkPasswordMatchMw
+    saveUserMw
+    renderMw(administration_edit_user.html)
+        - Fill with the user's data.
+GET /administration/del/user/:userid
+    authMw(admin=true)
+    getUserMw
+    delUserMw
+POST /administration/open/from=:start_date&to=:end_date
+    authMw(admin=true)
+    openDatesMw
+GET /administration/close/from=:start_date&to=:end_date
+    authMw(admin=true)
+    closeDatesMw
+GET, POST /administration/new_user
+    authMw
+    checkPasswordMatchMw
+    saveUserMw
+    renderMw(administration_new_user.html)
+
+GET /reservations/all   
+    authMw
+    getReservationsMw
+    renderMw(reservation_all.html)
+
+GET, POST /reservations/new   
+    authMw
+    checkIfNotReservedMw
+    saveReservationMw
+    renderMw(reservation_new.html)
+
+GET /reservations/user/:userid   
+    authMw
+    getUserReservationMw
+    renderMw(reservation_own.html)
+        - With the reservations of the given :userid
+        - Render delete button only if it belongs to the session user OR ADMIN.
+
+GET /reservations/del/:reservationid
+    authMw
+    checkPermissionMw 
+        - Check if the session user is the one who the reservation belongs to OR ADMIN.
+    getUserReservationMw
+    delUserReservationMw
+
+POST /logout
+    logoutMw
+    directToMw("/")
