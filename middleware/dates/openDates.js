@@ -1,6 +1,5 @@
 /**
- * Sets the given dates to "open" state.
- * They are available to reserve.
+ * Creates date records according to the given interval.
  */
  module.exports = function (objectrepository) {
 

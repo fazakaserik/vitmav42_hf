@@ -1,6 +1,5 @@
 /**
- * Sets the given dates to "closed" state.
- * They are unavailable to reserve.
+ * Deletes date records according to the interval.
  */
  module.exports = function (objectrepository) {
 
