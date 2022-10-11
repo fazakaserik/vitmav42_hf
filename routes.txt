@@ -1,0 +1,27 @@
++------------------------+
+| Greek Apartment Booker |
++------------------------+
+
++-------------------------------+----------------------------------------------------------+
+|          HTML Name            |                         Function                         |
++-------------------------------+----------------------------------------------------------+
+| index.html                    | Login form with no menu.                                 |
++-------------------------------+----------------------------------------------------------+
+| new.html                      | After login, shows the current news articles.            |
++-------------------------------+----------------------------------------------------------+
+| gallery.html                  | Gallery which showcases photos.                          |
++-------------------------------+----------------------------------------------------------+
+| profile.html                  | Current session user's profile datas.                    |
+|                               | (Edit functionalities are here.)                         |
++-------------------------------+----------------------------------------------------------+
+| administration.html           | This is only visible for admin user.                     |
+|                               | (User and reservation modifications are available here.) |
++-------------------------------+----------------------------------------------------------+
+| administration_new_user.html  | New user creation form, only for admin user.             |
++-------------------------------+----------------------------------------------------------+
+| reservation_all.html          | Lists all reservations.                                  |
++-------------------------------+----------------------------------------------------------+
+| reservation_new.html          | Creates a new reservation for the session user.          |
++-------------------------------+----------------------------------------------------------+
+| reservation_own.html          | List the current session user's reservations.            |
++-------------------------------+----------------------------------------------------------+
