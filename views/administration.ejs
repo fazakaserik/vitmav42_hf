@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <%- include("templates/header", {title: "Administration"}) -%>
+    </head>
+    <body>
+        <%- include("templates/navbar", {active: "administration"}) -%>
+
+        <div class="container">
+          <h1>Date Management</h1>
+          <form>
+            <div class="form-group">
+              <label for="startDate">Start Date</label>
+              <input type="date" class="form-control" id="startDate" aria-describedby="startDate" value="2023-02-04" min="2022-09-27" max="2024-04-02">
+              <label for="endDate">End Date</label>
+              <input type="date" class="form-control" id="endDate" aria-describedby="endDate" value="2023-04-02" min="2022-09-27" max="2024-04-02">
+            </div>
+            <a class="btn btn-primary" id="openButton" href="#" role="button">Open</a>
+            <a class="btn btn-danger" id="closeButton" href="#" role="button">Close</a>
+            <script>
+              document.getElementById("openButton").onclick = function() {
+                  var start_date = document.getElementById("startDate").getAttribute('value');
+                  var end_date = document.getElementById("endDate").getAttribute('value');
+                  window.location.href = "/administration/open/from="+start_date+"&to="+end_date;
+              };
+
+              document.getElementById("closeButton").onclick = function() {
+                  var start_date = document.getElementById("startDate").getAttribute('value');
+                  var end_date = document.getElementById("endDate").getAttribute('value');
+                  window.location.href = "/administration/close/from="+start_date+"&to="+end_date;
+              };
+            </script>
+          </form>
+        </div>
+
+        <div class="container">
+          <h1>Profile Management</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Phone</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% users.forEach(function(user){%>
+                <tr>
+                  <td><%= user.first_name %></td>
+                  <td><%= user.last_name %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.tel %></td>
+                  <td>
+                    <a class="btn btn-primary" href="/administration/edit/user/<%= user._id %>" role="button">Edit</a>
+                    <a class="btn btn-danger" href="/administration/del/user/<%= user._id %>" role="button">Delete</a>
+                  </td>
+                </tr>
+              <%});%>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a class="btn btn-success" href="/administration/new_user" role="button">New</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <%- include("templates/footer") %>
+    </body>
+</html>

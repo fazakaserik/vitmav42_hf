@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include("templates/header", {title: "Edit Profile (Admin)"}) -%>
+    </head>
+    <body>
+        <%- include("templates/navbar", {active: "administration"}) -%>
+
+        <div class="container">
+          <h1>Edit User</h1>
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" value="<%= user.first_name %>" id="firstName" placeholder="First name">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" value="<%= user.last_name %>" id="lastName" placeholder="Last name">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="email">E-mail</label>
+                <input type="email" class="form-control" value="<%= user.email %>" id="email" placeholder="E-mail">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="telNum">Telephone Number</label>
+                <input type="tel" class="form-control" value="<%= user.tel %>" id="telNum" placeholder="Telephone number">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="newPassword">Password</label>
+                <input type="password" class="form-control" value="<%= user.password %>" id="newPassword" placeholder="New password">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="newPasswordAgain">Repeat Password</label>
+                <input type="password" class="form-control" value="<%= user.password %>" id="newPasswordAgain" placeholder="Repeat new password">
+              </div>
+            </div>
+            <a class="btn btn-success" href="/administration/edit/user/<%= user._id %>" role="button">Save</a>
+            <a class="btn btn-danger" href="/administration" role="button">Cancel</a>
+          </form>
+        </div>
+
+        <%- include("templates/footer") %>
+    </body>
+</html>

@@ -1,10 +1,15 @@
 /**
  * Directs the user to a given URL.
  */
- module.exports = function (objectrepository) {
+ module.exports = function (objectrepository, view) {
 
     return function (req, res, next) {
-        return next();
+        /*if (typeof req.session.userid === 'undefined') {
+            return res.redirect('/login');
+        } else {
+            return res.redirect('/news');
+        }*/
+        return res.redirect('/'+view);
     };
 
 };

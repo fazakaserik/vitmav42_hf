@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <%- include("templates/header", {title: "News"}) -%>
+    </head>
+    <body>
+        <%- include("templates/navbar", {active: "news"}) -%>
+
+        <div class="container">
+          <h1>News</h1>
+          <%- include(
+                "templates/news/article", 
+                {
+                  title: "First Article", 
+                  text: "This is an example article which will be better looking and organized."
+                }
+              ) 
+          -%>
+          <%- include(
+                "templates/news/article", 
+            {
+              title: "Second Article", 
+              text: "This is another example article which will be better looking and organized."
+            }
+          ) 
+          -%>
+        </div>
+
+        <%- include("templates/footer") %>
+    </body>
+</html>
