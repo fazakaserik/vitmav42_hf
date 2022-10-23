@@ -44,6 +44,24 @@
           </form>
         </div>
 
+        <div class="container">
+            <h1>Reservations of <%= user.first_name %></h1>
+            <table class="table">
+              <tbody>
+                  <% reservations.forEach(function(reservation){ %>
+                    <tr>
+                      <td>
+                        <%= reservation.date %>
+                      </td>
+                      <td>
+                        <a class="btn btn-danger" href="#" role="button">Cancel</a>
+                      </td>
+                    </tr>
+                  <% }); %>
+              </tbody>
+            </table>
+        </div>
+
         <%- include("templates/footer") %>
     </body>
 </html>

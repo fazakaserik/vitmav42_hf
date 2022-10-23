@@ -80,6 +80,7 @@ module.exports = function (app) {
     app.get("/administration/edit/user/:userid",
         authMw(objectRepository, "admin"),
         getUserMw(objectRepository),
+        getUserReservationMw(objectRepository),
         checkPasswordMatchMw(objectRepository),
         saveUserMw(objectRepository),
         renderMw(objectRepository, "administration_edit_user")
@@ -157,7 +158,7 @@ module.exports = function (app) {
         authMw(objectRepository),
         checkPermissionMw(objectRepository),
         getReservationMw(objectRepository),
-        delReservationMw(objectRepository)
+        delReservationMw(objectRepository) // This should redirect back to the user page
     );
 
     app.get("/logout",
