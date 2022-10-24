@@ -26,9 +26,11 @@
             <a class="dropdown-item" href="/reservations/new">New</a>
           </div>
         </li>
+        <% if(session_user.username === "admin" && session_user.password === "admin") {%>
         <li class="nav-item <% if(active === "administration") {%>active<%}%>">
           <a class="nav-link" href="/administration">Administration</a>
         </li>
+        <%} %>
       </ul>
       <a class="btn btn-secondary" href="/logout">Sign Out</a>
     </div>

@@ -7,16 +7,17 @@
         <%- include("templates/navbar", {active: "reservations"}) -%>
 
         <div class="container">
-          <form>
+          <form method="POST" action="/reservations/new">
             <div class="form-group">
               <h1>New Reservation</h1>
               <label for="startDate">Check-in Date</label>
-              <input type="date" class="form-control" id="startDate" aria-describedby="startDate" value="2023-02-04" min="2022-09-27" max="2024-04-02">
+              <input type="date" class="form-control" id="startDate" name="startDate" aria-describedby="startDate" value="2024-02-04" min="2022-09-27" max="2024-04-02">
               <label for="endDate">Check-out Date</label>
-              <input type="date" class="form-control" id="endDate" aria-describedby="endDate" value="2023-04-02" min="2022-09-27" max="2024-04-02">
+              <input type="date" class="form-control" id="endDate" name="endDate" aria-describedby="endDate" value="2023-04-02" min="2022-09-27" max="2024-04-02">
             </div>
-            <a class="btn btn-primary" href="/reservations/user/42" role="button">Reserve</a>
+            <input type="submit" class="btn btn-primary" value="Reserve"/>
           </form>
+          <%- include("templates/alert") %>
         </div>
 
         <%- include("templates/footer") %>

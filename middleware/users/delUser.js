@@ -3,9 +3,10 @@
  */
  module.exports = function (objectrepository) {
 
-    return function (req, res, next) {
+    return function (req, res) {
+        // Database
 
-        return next();
+        return res.redirect("/administration");
     };
 
 };

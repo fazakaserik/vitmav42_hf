@@ -6,7 +6,7 @@
     return function (req, res) {
         // Database
 
-        return res.redirect("/administration/edit/user/"+ req.params.userid +"/?succ=User-successfully-saved!");
+        return res.redirect("/administration/new_user"+"/?succ=User-successfully-saved!");
     };
 
 };

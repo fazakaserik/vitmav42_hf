@@ -8,28 +8,16 @@
 
         <div class="container">
           <h1>Date Management</h1>
-          <form>
+          <form method="POST" action="/administration/date">
             <div class="form-group">
               <label for="startDate">Start Date</label>
-              <input type="date" class="form-control" id="startDate" aria-describedby="startDate" value="2023-02-04" min="2022-09-27" max="2024-04-02">
+              <input type="date" class="form-control" name="startDate" id="startDate" aria-describedby="startDate" value="2023-02-04" min="2022-09-27" max="2024-04-02">
               <label for="endDate">End Date</label>
-              <input type="date" class="form-control" id="endDate" aria-describedby="endDate" value="2023-04-02" min="2022-09-27" max="2024-04-02">
+              <input type="date" class="form-control" name="endDate" id="endDate" aria-describedby="endDate" value="2023-04-02" min="2022-09-27" max="2024-04-02">
             </div>
-            <a class="btn btn-primary" id="openButton" href="#" role="button">Open</a>
-            <a class="btn btn-danger" id="closeButton" href="#" role="button">Close</a>
-            <script>
-              document.getElementById("openButton").onclick = function() {
-                  var start_date = document.getElementById("startDate").getAttribute('value');
-                  var end_date = document.getElementById("endDate").getAttribute('value');
-                  window.location.href = "/administration/open/from="+start_date+"&to="+end_date;
-              };
-
-              document.getElementById("closeButton").onclick = function() {
-                  var start_date = document.getElementById("startDate").getAttribute('value');
-                  var end_date = document.getElementById("endDate").getAttribute('value');
-                  window.location.href = "/administration/close/from="+start_date+"&to="+end_date;
-              };
-            </script>
+            <input type="submit" class="btn btn-primary" name="open" value="Open"/>
+            <input type="submit" class="btn btn-primary" name="close" value="Close"/>
+            <%- include("templates/alert") %>
           </form>
         </div>
 

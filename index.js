@@ -1,4 +1,4 @@
-var port = 3000;
+const port = 3000;
 
 var express = require("express");
 var app = express();
@@ -34,7 +34,9 @@ app.use(bodyParser.urlencoded({
 /**
  * Include all routes.
  */
-require("./routes")(app);
+require("./routes/general")(app);
+require("./routes/reservations")(app);
+require("./routes/administration")(app);
 
 var server = app.listen(port, function () {
     console.log("Express running on port " + port + "!");

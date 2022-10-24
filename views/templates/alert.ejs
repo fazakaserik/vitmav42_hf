@@ -1,0 +1,12 @@
+<% if(typeof err !== "undefined") {%>
+    <p>&nbsp;</p> 
+    <div class="alert alert-danger" role="alert">
+      <%= err.split('-').join(' ') %>
+    </div>
+<% } %> 
+<% if(typeof succ !== "undefined") {%>
+    <p>&nbsp;</p> 
+    <div class="alert alert-success" role="alert">
+      <%= succ.split('-').join(' ') %>
+    </div>
+<% } %> 

@@ -7,7 +7,7 @@
         <%- include("templates/navbar", {active: "reservations"}) -%>
 
         <div class="container">
-          <h1>Own Reservations</h1>
+          <h1><%= (session_user._id === user._id) ? "Own Reservations" : "Reservations of " + user.first_name %> </h1>
           <table class="table">
             <tbody>
                 <% reservations.forEach(function(reservation){ %>
