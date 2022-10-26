@@ -16,7 +16,7 @@ app.use(express.static("public"));
 app.use(session({
     secret: "spooky scary skeletons",
     cookie: {
-        maxAge: 60000
+        maxAge: 600000
         },
     resave: true,
     saveUninitialized: false

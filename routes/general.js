@@ -2,8 +2,6 @@ var authMw = require("../middleware/auth/auth");
 var checkCredentialsMw = require("../middleware/auth/checkCredentials");
 var logoutMw = require("../middleware/auth/logout");
 
-var openDatesMw = require("../middleware/dates/editDates");
-
 var checkIfNotReservedMw = require("../middleware/reservations/checkIfNotReserved");
 var delReservationMw = require("../middleware/reservations/delReservation");
 var getReservationMw = require("../middleware/reservations/getReservation");

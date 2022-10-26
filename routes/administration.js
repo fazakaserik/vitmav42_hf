@@ -2,8 +2,6 @@ const authMw = require("../middleware/auth/auth");
 const checkCredentialsMw = require("../middleware/auth/checkCredentials");
 const logoutMw = require("../middleware/auth/logout");
 
-const editDatesMw = require("../middleware/dates/editDates");
-
 const checkIfNotReservedMw = require("../middleware/reservations/checkIfNotReserved");
 const delReservationMw = require("../middleware/reservations/delReservation");
 const getReservationMw = require("../middleware/reservations/getReservation");
@@ -67,11 +65,6 @@ module.exports = function (app) {
         checkPasswordMatchMw(objectRepository),
         delUserMw(objectRepository),
         directToMw(objectRepository, "administration")
-    );
-
-    app.post("/administration/date",
-        authMw(objectRepository, "admin"),
-        editDatesMw(objectRepository)
     );
 
     app.get("/administration/new_user",

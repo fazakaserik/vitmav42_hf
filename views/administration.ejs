@@ -7,21 +7,6 @@
         <%- include("templates/navbar", {active: "administration"}) -%>
 
         <div class="container">
-          <h1>Date Management</h1>
-          <form method="POST" action="/administration/date">
-            <div class="form-group">
-              <label for="startDate">Start Date</label>
-              <input type="date" class="form-control" name="startDate" id="startDate" aria-describedby="startDate" value="2023-02-04" min="2022-09-27" max="2024-04-02">
-              <label for="endDate">End Date</label>
-              <input type="date" class="form-control" name="endDate" id="endDate" aria-describedby="endDate" value="2023-04-02" min="2022-09-27" max="2024-04-02">
-            </div>
-            <input type="submit" class="btn btn-primary" name="open" value="Open"/>
-            <input type="submit" class="btn btn-primary" name="close" value="Close"/>
-            <%- include("templates/alert") %>
-          </form>
-        </div>
-
-        <div class="container">
           <h1>Profile Management</h1>
           <table class="table">
             <thead>
