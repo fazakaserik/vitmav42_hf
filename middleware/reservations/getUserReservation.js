@@ -1,30 +1,27 @@
 /**
  * Gets the given user's reservation from database.
  */
+
+ const requireOption = require("../utils/requireOption");
+
  module.exports = function (objectrepository) {
+
+    const ReservationModel = requireOption(objectrepository, "ReservationModel")
 
     return function (req, res, next) {
 
-        // Mock
-        res.locals.reservations = [
-            {
-                date: "2022-10-23",
-                user_id: 42,
-                user_name: "Erik Fazakas"
-            },
-            {
-                date: "2022-10-24",
-                user_id: 42,
-                user_name: "Erik Fazakas"
-            },
-            {
-                date: "2022-10-25",
-                user_id: 42,
-                user_name: "Erik Fazakas"
+        // At this point the auth middleware should establish session
+
+        let userid = (req.params.userid === undefined) ? req.session._id : req.params.userid;
+
+        ReservationModel.find({_reserver: userid}, (err, dates) => {
+            if (err || !dates) {
+                return next(err);
             }
-        ];
 
-        return next();
+            res.locals.user.reservations = dates;
+
+            return next();
+        });
     };
-
-};
+}

@@ -21,7 +21,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="/reservations/all">All</a>
-            <a class="dropdown-item" href="/reservations/user/42">Own</a>
+            <a class="dropdown-item" href="/reservations/user/<%= session_user._id %> ">Own</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/reservations/new">New</a>
           </div>

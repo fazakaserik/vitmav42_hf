@@ -22,12 +22,14 @@ var directToMw = require("../middleware/utils/directTo");
 var renderMw = require("../middleware/utils/render");
 const directTo = require("../middleware/utils/directTo");
 
+const UserModel = require("../models/user");
+const ReservationModel = require("../models/reservation");
+
 module.exports = function (app) {
     
-    var objectRepository = {
-        taskModel: "taskModel",
-        commentModel: "commentModel",
-        userModel: "userModel"
+    const objectRepository = {
+        UserModel: UserModel,
+        ReservationModel: ReservationModel
       };
 
     app.get("/",
@@ -69,7 +71,7 @@ module.exports = function (app) {
         getUserMw(objectRepository),
         checkPasswordMatchMw(objectRepository),
         saveUserMw(objectRepository),
-        renderMw(objectRepository, "profile")
+        directToMw(objectRepository, "profile")
     );
 
     app.get("/logout",

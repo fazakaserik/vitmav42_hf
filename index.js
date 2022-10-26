@@ -1,7 +1,8 @@
 const port = 3000;
 
-var express = require("express");
-var app = express();
+const express = require("express");
+const dbinit = require("./dbinit");
+const app = express();
 
 var session = require('express-session');
 var bodyParser = require('body-parser');

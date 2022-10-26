@@ -7,29 +7,30 @@
  * redirects the user back to "/login",
  * with the given error message: "/login/?err=bad_credentials".
  */
+
+const requireOption = require("../utils/requireOption");
+
 module.exports = function (objectrepository) {
+
+    const UserModel = requireOption(objectrepository, "UserModel")
 
     return function (req, res, next) {
 
-        var username = req.body.username;
-        var password = req.body.password;
+        let username = req.body.username;
+        let password = req.body.password;
 
         // Check credentials from SQL
-        req.session._id = 42;
-        req.session.username = username;
-        req.session.password = password;
-
-        if(typeof req.session._id === "undefined" || req.session._id === "") {
-            return res.redirect('/login/?err=User-identifier-missing!');
-        }
-        if(typeof req.session.username === "undefined" || req.session.username === "") {
-            return res.redirect('/login/?err=Username-missing!');
-        }
-        if(typeof req.session.password === "undefined" || req.session.password === "") {
-            return res.redirect('/login/?err=Password-missing!');
-        }
-
-        return next();
+        UserModel.findOne({username: username, password: password}, (err, user) => {
+            if (err || !user) {
+                return res.redirect('/login/?err=This-account-doesn\'t-exist!');
+            }
+            
+            req.session._id = user._id;
+            req.session.username = user.username;
+            req.session.password = user.password;
+    
+            return next();
+        })
 
     };
 

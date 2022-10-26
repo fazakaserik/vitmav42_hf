@@ -1,12 +1,46 @@
 /**
  * Saves (create or edit) user.
  */
+ const requireOption = require("../utils/requireOption");
+
  module.exports = function (objectrepository) {
 
-    return function (req, res) {
-        // Database
+    const UserModel = requireOption(objectrepository, "UserModel")
 
-        return res.redirect("/administration/edit/user/"+ req.params.userid +"/?succ=User-successfully-saved!");
+    return function (req, res, next) {
+
+        if (typeof res.locals.user === "undefined") {
+            // New user
+            let user = new UserModel();
+            user.first_name = req.body.firstName;
+            user.last_name = req.body.lastName;
+            user.email = req.body.email;
+            user.tel = req.body.tel;
+            user.username = req.body.username;
+            user.password = req.body.password;
+            user.save((err)=>{
+                return next(err);
+            });
+            return next();
+        } else {
+            // Save user
+            UserModel.findByIdAndUpdate(res.locals.user._id, 
+                {
+                    $set: {
+                        first_name: req.body.firstName,
+                        last_name: req.body.lastName,
+                        email: req.body.email,
+                        tel: req.body.tel,
+                        password: req.body.password
+                    }
+                },
+                (err) => {
+                if (err) {
+                    return next(err);
+                }
+    
+                return next();
+            });
+        }
     };
-
-};
+}

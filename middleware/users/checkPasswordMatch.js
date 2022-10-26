@@ -6,11 +6,17 @@
 
     return function (req, res, next) {
 
-        var password = req.body.password;
-        var passwordAgain = req.body.passwordAgain;
+        if(req.body.password !== req.body.passwordAgain) {
+            return res.redirect(req.body.previousPath+"?err=Passwords-doesn\'t-match!");
+        }
 
-        if(password !== passwordAgain) {
-            return res.redirect(req.session.prev_url+"/?err=Passwords-doesn\'t-match!");
+        if(typeof req.body.currentPassword !== "undefined") {
+            if(req.body.currentPassword === "") {
+                return res.redirect(req.body.previousPath+"?err=Enter-current-password-to-save!");
+            }
+            if(req.body.password !== req.body.currentPassword) {
+                return res.redirect(req.body.previousPath+"?err=Current-password-is-not-valid!");
+            }
         }
 
         return next();

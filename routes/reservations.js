@@ -22,12 +22,14 @@ var directToMw = require("../middleware/utils/directTo");
 var renderMw = require("../middleware/utils/render");
 const directTo = require("../middleware/utils/directTo");
 
+const UserModel = require("../models/user");
+const ReservationModel = require("../models/reservation");
+
 module.exports = function (app) {
     
-    var objectRepository = {
-        taskModel: "taskModel",
-        commentModel: "commentModel",
-        userModel: "userModel"
+    const objectRepository = {
+        UserModel: UserModel,
+        ReservationModel: ReservationModel
       };
 
     app.get("/reservations/all",
@@ -44,7 +46,11 @@ module.exports = function (app) {
     app.post("/reservations/new",
         authMw(objectRepository),
         checkIfNotReservedMw(objectRepository),
-        saveReservationMw(objectRepository)
+        getUserMw(objectRepository),
+        saveReservationMw(objectRepository),
+        (req, res) => {
+            res.redirect("/reservations/user/"+req.session._id);
+        }
     );
 
     app.get("/reservations/user/:userid",
@@ -54,10 +60,13 @@ module.exports = function (app) {
         renderMw(objectRepository, "reservations_own")
     );
 
-    app.post("/reservations/del/:reservationid",
+    app.post("/reservations/del",
         authMw(objectRepository),
         checkPermissionMw(objectRepository),
-        delReservationMw(objectRepository) // This should redirect back to the user page
+        delReservationMw(objectRepository),
+        (req, res) => {
+            res.redirect(req.body.previousPath);
+        }
     );
 
 };

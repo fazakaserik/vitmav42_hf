@@ -1,10 +1,20 @@
 /**
  * Deletes the given reservation from database.
  */
+ const requireOption = require("../utils/requireOption");
+
  module.exports = function (objectrepository) {
 
-    return function (req, res, next) {
-        return next();
-    };
+    const ReservationModel = requireOption(objectrepository, "ReservationModel")
 
-};
+    return function (req, res, next) {
+
+        ReservationModel.findByIdAndRemove(req.body._id, (err, date) => {
+            if (err) {
+                return next(err);
+            }
+
+            return next();
+        });
+    };
+}

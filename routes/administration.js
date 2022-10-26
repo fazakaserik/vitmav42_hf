@@ -1,34 +1,35 @@
-var authMw = require("../middleware/auth/auth");
-var checkCredentialsMw = require("../middleware/auth/checkCredentials");
-var logoutMw = require("../middleware/auth/logout");
+const authMw = require("../middleware/auth/auth");
+const checkCredentialsMw = require("../middleware/auth/checkCredentials");
+const logoutMw = require("../middleware/auth/logout");
 
-var editDatesMw = require("../middleware/dates/editDates");
+const editDatesMw = require("../middleware/dates/editDates");
 
-var checkIfNotReservedMw = require("../middleware/reservations/checkIfNotReserved");
-var delReservationMw = require("../middleware/reservations/delReservation");
-var getReservationMw = require("../middleware/reservations/getReservation");
-var getReservationsMw = require("../middleware/reservations/getReservations");
-var getUserReservationMw = require("../middleware/reservations/getUserReservation");
-var saveReservationMw = require("../middleware/reservations/saveReservation");
+const checkIfNotReservedMw = require("../middleware/reservations/checkIfNotReserved");
+const delReservationMw = require("../middleware/reservations/delReservation");
+const getReservationMw = require("../middleware/reservations/getReservation");
+const getReservationsMw = require("../middleware/reservations/getReservations");
+const getUserReservationMw = require("../middleware/reservations/getUserReservation");
+const saveReservationMw = require("../middleware/reservations/saveReservation");
 
-var checkPasswordMatchMw = require("../middleware/users/checkPasswordMatch");
-var checkPermissionMw = require("../middleware/users/checkPermission");
-var delUserMw = require("../middleware/users/delUser");
-var getUserMw = require("../middleware/users/getUser");
-var getUsersMw = require("../middleware/users/getUsers");
-var saveUserMw = require("../middleware/users/saveUser");
-var registerUserMw = require("../middleware/users/registerUser");
+const checkPasswordMatchMw = require("../middleware/users/checkPasswordMatch");
+const checkPermissionMw = require("../middleware/users/checkPermission");
+const delUserMw = require("../middleware/users/delUser");
+const getUserMw = require("../middleware/users/getUser");
+const getUsersMw = require("../middleware/users/getUsers");
+const saveUserMw = require("../middleware/users/saveUser");
 
-var directToMw = require("../middleware/utils/directTo");
-var renderMw = require("../middleware/utils/render");
+const directToMw = require("../middleware/utils/directTo");
+const renderMw = require("../middleware/utils/render");
 const directTo = require("../middleware/utils/directTo");
+
+const UserModel = require("../models/user");
+const ReservationModel = require("../models/reservation");
 
 module.exports = function (app) {
     
-    var objectRepository = {
-        taskModel: "taskModel",
-        commentModel: "commentModel",
-        userModel: "userModel"
+    const objectRepository = {
+        UserModel: UserModel,
+        ReservationModel: ReservationModel
       };
 
     app.get("/administration",
@@ -44,14 +45,17 @@ module.exports = function (app) {
         renderMw(objectRepository, "administration_edit_user")
     );
 
-    app.post("/administration/edit/user/:userid",
+    app.post("/administration/edit/user",
         authMw(objectRepository, "admin"),
         (req, res, next) => {
-            req.session.prev_url = "/administration/edit/user/"+req.params.userid;
+            req.session.prev_url = "/administration/edit/user/"+req.body._id;
             return next();
         },
         checkPasswordMatchMw(objectRepository),
-        saveUserMw(objectRepository)
+        saveUserMw(objectRepository),
+        (req, res) => {
+            res.redirect("/administration/edit/user/"+req.body._id+"?succ=Successfully-saved!");
+        }
     );
 
     app.get("/administration/del/user/:userid",
@@ -61,7 +65,8 @@ module.exports = function (app) {
             return next();
         },
         checkPasswordMatchMw(objectRepository),
-        delUserMw(objectRepository)
+        delUserMw(objectRepository),
+        directToMw(objectRepository, "administration")
     );
 
     app.post("/administration/date",
@@ -76,12 +81,9 @@ module.exports = function (app) {
 
     app.post("/administration/new_user",
         authMw(objectRepository, "admin"),
-        (req, res, next) => {
-            req.session.prev_url = "/administration/new_user";
-            return next();
-        },
         checkPasswordMatchMw(objectRepository),
-        registerUserMw(objectRepository)
+        saveUserMw(objectRepository),
+        directToMw(objectRepository, "administration")
     );
 
 };

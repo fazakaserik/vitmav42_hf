@@ -1,12 +1,22 @@
 /**
  * Deletes user from database.
  */
+ const requireOption = require("../utils/requireOption");
+
  module.exports = function (objectrepository) {
 
-    return function (req, res) {
-        // Database
+    const UserModel = requireOption(objectrepository, "UserModel")
 
-        return res.redirect("/administration");
+    return function (req, res, next) {
+
+        // At this point the auth middleware should establish session
+
+        UserModel.findByIdAndRemove(req.params.userid, (err, date) => {
+            if (err) {
+                return next(err);
+            }
+
+            return next();
+        });
     };
-
-};
+}

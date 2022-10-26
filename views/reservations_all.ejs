@@ -19,10 +19,13 @@
                 <% reservations.forEach(function(reservation){ %>
                   <tr>
                     <td>
-                      <%= reservation.date %>
+                      <%= reservation.date.toLocaleDateString("hu-HU") %>
                     </td>
                     <td>
-                      <a href="/reservations/user/<%= reservation.user_id %>"><%= reservation.user_name %></a>
+                      <%= reservation.name %>
+                    </td>
+                    <td>
+                      <a href="/reservations/user/<%= reservation._reserver %>"><%= reservation.reserver.first_name + " " + reservation.reserver.last_name %></a>
                     </td>
                   </tr>
                 <% }); %>
