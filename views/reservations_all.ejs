@@ -25,7 +25,7 @@
                       <%= reservation.name %>
                     </td>
                     <td>
-                      <a href="/reservations/user/<%= reservation._reserver %>"><%= reservation.reserver.first_name + " " + reservation.reserver.last_name %></a>
+                      <a href="/reservations/user/<%= reservation._reserver._id %>"><%= reservation._reserver.first_name + " " + reservation._reserver.last_name %></a>
                     </td>
                   </tr>
                 <% }); %>

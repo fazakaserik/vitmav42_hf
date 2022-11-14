@@ -9,7 +9,7 @@
 
     return function (req, res, next) {
 
-        if (typeof res.locals.user === "undefined") {
+        if (typeof req.body._id === "undefined") {
             // New user
             let user = new UserModel();
             user.first_name = req.body.firstName;
@@ -24,7 +24,7 @@
             return next();
         } else {
             // Save user
-            UserModel.findByIdAndUpdate(res.locals.user._id, 
+            UserModel.findByIdAndUpdate(req.body._id, 
                 {
                     $set: {
                         first_name: req.body.firstName,

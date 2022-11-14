@@ -14,12 +14,12 @@
 
         let userid = (req.params.userid === undefined) ? req.session._id : req.params.userid;
 
-        ReservationModel.find({_reserver: userid}, (err, dates) => {
-            if (err || !dates) {
+        ReservationModel.find({_reserver: userid}).populate("_reserver").exec((err, reservations) => {
+            if (err || !reservations) {
                 return next(err);
             }
 
-            res.locals.user.reservations = dates;
+            res.locals.reservations = reservations;
 
             return next();
         });

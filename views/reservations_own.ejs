@@ -7,10 +7,10 @@
         <%- include("templates/navbar", {active: "reservations"}) -%>
 
         <div class="container">
-          <h1><%= (session_user._id === user._id) ? "Own Reservations" : "Reservations of " + user.first_name %> </h1>
+          <h1><%= (session_user._id == user._id) ? "Own Reservations" : "Reservations of " + user.first_name %> </h1>
           <table class="table">
             <tbody>
-                <% user.reservations.forEach(function(reservation){ %>
+                <% reservations.forEach(function(reservation){ %>
                   <tr>
                     <td>
                       <%= reservation.date.toLocaleDateString("hu-HU") %>
@@ -23,7 +23,9 @@
                         <form action="/reservations/del" method="post">
                           <input type="hidden" name="_id" value="<%= reservation._id %>">
                           <input type="hidden" id="previousPath_<%= reservation._id %>" name="previousPath">
-                          <input type="submit" value="Cancel" class="btn btn-danger">
+                          <% if (session_user._id == user._id) { %>
+                            <input type="submit" value="Cancel" class="btn btn-danger">
+                          <% } %>
                         </form>
                         <script>
                           document.getElementById("previousPath_<%= reservation._id %>").setAttribute("value", window.location.pathname);

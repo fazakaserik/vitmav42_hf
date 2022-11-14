@@ -8,7 +8,7 @@
 
         <div class="container">
           <h1>Edit User</h1>
-          <form method="POST" action="/administration/edit/user">
+          <form method="POST" action="/administration/edit/user/<%= user._id %>">
             <input type="hidden" name="_id" value="<%= user._id %>">
             <div class="form-row">
               <div class="form-group col-md-6">
@@ -54,7 +54,7 @@
             <h1>Reservations of <%= user.first_name %></h1>
             <table class="table">
               <tbody>
-                  <% user.reservations.forEach(function(reservation){ %>
+                  <% reservations.forEach(function(reservation){ %>
                     <tr>
                       <td>
                         <%= reservation.date.toLocaleDateString("hu-HU") %>

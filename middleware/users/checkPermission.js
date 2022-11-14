@@ -26,15 +26,4 @@
         });
     };
 
-    return function (req, res, next) {
-
-        // If admin or the owner of the reservation
-        if(req.session.username !== "admin" || req.session.password !== "admin" ||
-        req.session._id !== req.params._id) {
-            return res.redirect('/reservations/all');
-        }
-
-        return next();
-    };
-
 };

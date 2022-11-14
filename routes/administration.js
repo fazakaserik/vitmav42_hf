@@ -43,7 +43,7 @@ module.exports = function (app) {
         renderMw(objectRepository, "administration_edit_user")
     );
 
-    app.post("/administration/edit/user",
+    app.post("/administration/edit/user/:userid",
         authMw(objectRepository, "admin"),
         (req, res, next) => {
             req.session.prev_url = "/administration/edit/user/"+req.body._id;

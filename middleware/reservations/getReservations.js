@@ -12,35 +12,12 @@
 
         // At this point the auth middleware should establish session
 
-        ReservationModel.find({}, (err, dates) => {
-            if (err || !dates) {
-                return next(err);
+        ReservationModel.find({}).populate("_reserver").exec((err, reservations) => {
+            if (err) {
+                return next(err)
             }
-
-            res.locals.reservations = dates;
-
-            res.locals.reservations.forEach(function(reservation){
-
-                UserModel.findOne({_id: reservation._reserver}, (err, user) => {
-                    if (err || !user) {
-                        return next(err);
-                    }
-
-                    reservation = reservation.toJSON();
-
-                    reservation.reserver = {
-                        first_name: user.first_name,
-                        last_name: user.last_name,
-                        email: user.email
-                    };
-
-                    return reservation;
-                    
-                });
-                
-            });
-
+            res.locals.reservations = reservations;
             return next();
-        });
+        })
     };
 }
