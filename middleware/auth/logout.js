@@ -1,13 +1,10 @@
 /**
  * Ends the current session.
  */
- module.exports = function (objectrepository) {
+module.exports = function (objectrepository) {
+  return function (req, res, next) {
+    req.session.destroy();
 
-    return function (req, res, next) {
-        
-        req.session.destroy();
-
-        return next();
-    };
-
+    return next();
+  };
 };

@@ -2,28 +2,28 @@
  * Checks if the curretn session user has permission to the wanted page.
  * Admin users always have permission.
  */
- const requireOption = require("../utils/requireOption");
+const requireOption = require("../utils/requireOption");
 
- module.exports = function (objectrepository) {
+module.exports = function (objectrepository) {
+  const ReservationModel = requireOption(objectrepository, "ReservationModel");
 
-    const ReservationModel = requireOption(objectrepository, "ReservationModel")
+  return function (req, res, next) {
+    // At this point the auth middleware should establish session
 
-    return function (req, res, next) {
+    ReservationModel.findOne({ _id: req.params._id }, (err, date) => {
+      if (err || !date) {
+        return next(err);
+      }
 
-        // At this point the auth middleware should establish session
+      if (
+        req.session.username !== "admin" ||
+        req.session.password !== "admin" ||
+        req.session._id !== date._reserver
+      ) {
+        return res.redirect("/reservations/all");
+      }
 
-        ReservationModel.findOne({_id: req.params._id}, (err, date) => {
-            if (err || !date) {
-                return next(err);
-            }
-
-            if(req.session.username !== "admin" || req.session.password !== "admin" ||
-                req.session._id !== date._reserver) {
-                return res.redirect('/reservations/all');
-            }
-
-            return next();
-        });
-    };
-
+      return next();
+    });
+  };
 };

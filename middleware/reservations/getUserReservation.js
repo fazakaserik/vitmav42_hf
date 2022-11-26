@@ -2,26 +2,27 @@
  * Gets the given user's reservation from database.
  */
 
- const requireOption = require("../utils/requireOption");
+const requireOption = require("../utils/requireOption");
 
- module.exports = function (objectrepository) {
+module.exports = function (objectrepository) {
+  const ReservationModel = requireOption(objectrepository, "ReservationModel");
 
-    const ReservationModel = requireOption(objectrepository, "ReservationModel")
+  return function (req, res, next) {
+    // At this point the auth middleware should establish session
 
-    return function (req, res, next) {
+    let userid =
+      req.params.userid === undefined ? req.session._id : req.params.userid;
 
-        // At this point the auth middleware should establish session
+    ReservationModel.find({ _reserver: userid })
+      .populate("_reserver")
+      .exec((err, reservations) => {
+        if (err || !reservations) {
+          return next(err);
+        }
 
-        let userid = (req.params.userid === undefined) ? req.session._id : req.params.userid;
+        res.locals.reservations = reservations;
 
-        ReservationModel.find({_reserver: userid}).populate("_reserver").exec((err, reservations) => {
-            if (err || !reservations) {
-                return next(err);
-            }
-
-            res.locals.reservations = reservations;
-
-            return next();
-        });
-    };
-}
+        return next();
+      });
+  };
+};

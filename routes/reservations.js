@@ -24,47 +24,50 @@ const UserModel = require("../models/user");
 const ReservationModel = require("../models/reservation");
 
 module.exports = function (app) {
-    
-    const objectRepository = {
-        UserModel: UserModel,
-        ReservationModel: ReservationModel
-      };
+  const objectRepository = {
+    UserModel: UserModel,
+    ReservationModel: ReservationModel,
+  };
 
-    app.get("/reservations/all",
-        authMw(objectRepository),
-        getReservationsMw(objectRepository),
-        renderMw(objectRepository, "reservations_all")
-    );
+  app.get(
+    "/reservations/all",
+    authMw(objectRepository),
+    getReservationsMw(objectRepository),
+    renderMw(objectRepository, "reservations_all")
+  );
 
-    app.get("/reservations/new",
-        authMw(objectRepository),
-        renderMw(objectRepository, "reservations_new")
-    );
+  app.get(
+    "/reservations/new",
+    authMw(objectRepository),
+    renderMw(objectRepository, "reservations_new")
+  );
 
-    app.post("/reservations/new",
-        authMw(objectRepository),
-        checkIfNotReservedMw(objectRepository),
-        getUserMw(objectRepository),
-        saveReservationMw(objectRepository),
-        (req, res) => {
-            res.redirect("/reservations/user/"+req.session._id);
-        }
-    );
+  app.post(
+    "/reservations/new",
+    authMw(objectRepository),
+    checkIfNotReservedMw(objectRepository),
+    getUserMw(objectRepository),
+    saveReservationMw(objectRepository),
+    (req, res) => {
+      res.redirect("/reservations/user/" + req.session._id);
+    }
+  );
 
-    app.get("/reservations/user/:userid",
-        authMw(objectRepository),
-        getUserMw(objectRepository),
-        getUserReservationMw(objectRepository),
-        renderMw(objectRepository, "reservations_own")
-    );
+  app.get(
+    "/reservations/user/:userid",
+    authMw(objectRepository),
+    getUserMw(objectRepository),
+    getUserReservationMw(objectRepository),
+    renderMw(objectRepository, "reservations_own")
+  );
 
-    app.post("/reservations/del",
-        authMw(objectRepository),
-        checkPermissionMw(objectRepository),
-        delReservationMw(objectRepository),
-        (req, res) => {
-            res.redirect(req.body.previousPath);
-        }
-    );
-
+  app.post(
+    "/reservations/del",
+    authMw(objectRepository),
+    checkPermissionMw(objectRepository),
+    delReservationMw(objectRepository),
+    (req, res) => {
+      res.redirect(req.body.previousPath);
+    }
+  );
 };

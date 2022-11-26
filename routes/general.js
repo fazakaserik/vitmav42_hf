@@ -24,56 +24,57 @@ const UserModel = require("../models/user");
 const ReservationModel = require("../models/reservation");
 
 module.exports = function (app) {
-    
-    const objectRepository = {
-        UserModel: UserModel,
-        ReservationModel: ReservationModel
-      };
+  const objectRepository = {
+    UserModel: UserModel,
+    ReservationModel: ReservationModel,
+  };
 
-    app.get("/",
-        authMw(objectRepository),
-        directToMw(objectRepository, "news")
-    );
+  app.get("/", authMw(objectRepository), directToMw(objectRepository, "news"));
 
-    app.get("/login",
-        renderMw(objectRepository, "login")
-    );
+  app.get("/login", renderMw(objectRepository, "login"));
 
-    app.post("/login",
-        checkCredentialsMw(objectRepository),
-        directToMw(objectRepository, "")
-    )
+  app.post(
+    "/login",
+    checkCredentialsMw(objectRepository),
+    directToMw(objectRepository, "")
+  );
 
-    app.get("/login/?err=:err_msg",
-        renderMw(objectRepository, "login", "err_msg")
-    );
+  app.get(
+    "/login/?err=:err_msg",
+    renderMw(objectRepository, "login", "err_msg")
+  );
 
-    app.get("/news",
-        authMw(objectRepository),
-        renderMw(objectRepository, "news")
-    );
+  app.get(
+    "/news",
+    authMw(objectRepository),
+    renderMw(objectRepository, "news")
+  );
 
-    app.get("/gallery",
-        authMw(objectRepository),
-        renderMw(objectRepository, "gallery")
-    );
+  app.get(
+    "/gallery",
+    authMw(objectRepository),
+    renderMw(objectRepository, "gallery")
+  );
 
-    app.get("/profile",
-        authMw(objectRepository),
-        getUserMw(objectRepository),
-        renderMw(objectRepository, "profile")
-    );
+  app.get(
+    "/profile",
+    authMw(objectRepository),
+    getUserMw(objectRepository),
+    renderMw(objectRepository, "profile")
+  );
 
-    app.post("/profile",
-        authMw(objectRepository),
-        getUserMw(objectRepository),
-        checkPasswordMatchMw(objectRepository),
-        saveUserMw(objectRepository),
-        directToMw(objectRepository, "profile")
-    );
+  app.post(
+    "/profile",
+    authMw(objectRepository),
+    getUserMw(objectRepository),
+    checkPasswordMatchMw(objectRepository),
+    saveUserMw(objectRepository),
+    directToMw(objectRepository, "profile")
+  );
 
-    app.get("/logout",
-        logoutMw(objectRepository),
-        directToMw(objectRepository, "")
-    );
+  app.get(
+    "/logout",
+    logoutMw(objectRepository),
+    directToMw(objectRepository, "")
+  );
 };

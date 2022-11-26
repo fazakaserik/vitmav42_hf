@@ -1,21 +1,21 @@
 body {
-    background-image: url("../images/beaches/greece_sea.jpeg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    padding-bottom: 50px;
+  background-image: url("../images/beaches/greece_sea.jpeg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  padding-bottom: 50px;
 }
 
 .container {
-    margin-top: 50px;
-    padding-top: 20px;
-    padding-bottom: 10px;
-    background-color: aliceblue;
+  margin-top: 50px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  background-color: aliceblue;
 }
 
 .article {
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 2px 2px 5px;
-    background-color:cornsilk;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 5px;
+  background-color: cornsilk;
 }

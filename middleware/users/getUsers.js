@@ -4,20 +4,17 @@
 
 const requireOption = require("../utils/requireOption");
 
- module.exports = function (objectrepository) {
+module.exports = function (objectrepository) {
+  const UserModel = requireOption(objectrepository, "UserModel");
 
-    const UserModel = requireOption(objectrepository, "UserModel")
+  return function (req, res, next) {
+    UserModel.find({}, (err, users) => {
+      if (err || !users) {
+        return next(err);
+      }
 
-    return function (req, res, next) {
-
-        UserModel.find({}, (err, users) => {
-            if (err || !users) {
-                return next(err);
-            }
-
-            res.locals.users = users;
-            return next();
-        });
-    };
-
+      res.locals.users = users;
+      return next();
+    });
+  };
 };

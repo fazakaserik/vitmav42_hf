@@ -1,13 +1,13 @@
 {
-    "compilerOptions": {
-        "baseUrl": "./",
-        "paths": {
-            "@Mw/*": ["middleware/*"],
-            "@Mw/auth/*": ["middleware/auth/*"],
-            "@Mw/dates/*": ["middleware/dates/*"],
-            "@Mw/reservations/*": ["middleware/reservations/*"],
-            "@Mw/users/*": ["middleware/users/*"],
-            "@Mw/utils/*": ["middleware/utils/*"]
-        }
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@Mw/*": ["middleware/*"],
+      "@Mw/auth/*": ["middleware/auth/*"],
+      "@Mw/dates/*": ["middleware/dates/*"],
+      "@Mw/reservations/*": ["middleware/reservations/*"],
+      "@Mw/users/*": ["middleware/users/*"],
+      "@Mw/utils/*": ["middleware/utils/*"]
     }
+  }
 }

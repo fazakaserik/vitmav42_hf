@@ -24,59 +24,67 @@ const UserModel = require("../models/user");
 const ReservationModel = require("../models/reservation");
 
 module.exports = function (app) {
-    
-    const objectRepository = {
-        UserModel: UserModel,
-        ReservationModel: ReservationModel
-      };
+  const objectRepository = {
+    UserModel: UserModel,
+    ReservationModel: ReservationModel,
+  };
 
-    app.get("/administration",
-        authMw(objectRepository, "admin"),
-        getUsersMw(objectRepository),
-        renderMw(objectRepository, "administration")
-    );
+  app.get(
+    "/administration",
+    authMw(objectRepository, "admin"),
+    getUsersMw(objectRepository),
+    renderMw(objectRepository, "administration")
+  );
 
-    app.get("/administration/edit/user/:userid",
-        authMw(objectRepository, "admin"),
-        getUserMw(objectRepository),
-        getUserReservationMw(objectRepository),
-        renderMw(objectRepository, "administration_edit_user")
-    );
+  app.get(
+    "/administration/edit/user/:userid",
+    authMw(objectRepository, "admin"),
+    getUserMw(objectRepository),
+    getUserReservationMw(objectRepository),
+    renderMw(objectRepository, "administration_edit_user")
+  );
 
-    app.post("/administration/edit/user/:userid",
-        authMw(objectRepository, "admin"),
-        (req, res, next) => {
-            req.session.prev_url = "/administration/edit/user/"+req.body._id;
-            return next();
-        },
-        checkPasswordMatchMw(objectRepository),
-        saveUserMw(objectRepository),
-        (req, res) => {
-            res.redirect("/administration/edit/user/"+req.body._id+"?succ=Successfully-saved!");
-        }
-    );
+  app.post(
+    "/administration/edit/user/:userid",
+    authMw(objectRepository, "admin"),
+    (req, res, next) => {
+      req.session.prev_url = "/administration/edit/user/" + req.body._id;
+      return next();
+    },
+    checkPasswordMatchMw(objectRepository),
+    saveUserMw(objectRepository),
+    (req, res) => {
+      res.redirect(
+        "/administration/edit/user/" +
+          req.body._id +
+          "?succ=Successfully-saved!"
+      );
+    }
+  );
 
-    app.get("/administration/del/user/:userid",
-        authMw(objectRepository, "admin"),
-        (req, res, next) => {
-            req.session.prev_url = "/administration/edit/user/"+req.params.userid;
-            return next();
-        },
-        checkPasswordMatchMw(objectRepository),
-        delUserMw(objectRepository),
-        directToMw(objectRepository, "administration")
-    );
+  app.get(
+    "/administration/del/user/:userid",
+    authMw(objectRepository, "admin"),
+    (req, res, next) => {
+      req.session.prev_url = "/administration/edit/user/" + req.params.userid;
+      return next();
+    },
+    checkPasswordMatchMw(objectRepository),
+    delUserMw(objectRepository),
+    directToMw(objectRepository, "administration")
+  );
 
-    app.get("/administration/new_user",
-        authMw(objectRepository, "admin"),
-        renderMw(objectRepository, "administration_new_user")
-    );
+  app.get(
+    "/administration/new_user",
+    authMw(objectRepository, "admin"),
+    renderMw(objectRepository, "administration_new_user")
+  );
 
-    app.post("/administration/new_user",
-        authMw(objectRepository, "admin"),
-        checkPasswordMatchMw(objectRepository),
-        saveUserMw(objectRepository),
-        directToMw(objectRepository, "administration")
-    );
-
+  app.post(
+    "/administration/new_user",
+    authMw(objectRepository, "admin"),
+    checkPasswordMatchMw(objectRepository),
+    saveUserMw(objectRepository),
+    directToMw(objectRepository, "administration")
+  );
 };
