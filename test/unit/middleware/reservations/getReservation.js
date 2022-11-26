@@ -8,7 +8,7 @@ describe('getReservation middleware ', function () {
 				ReservationModel: {
 					findOne: (param1, callback) => {
 						expect(param1).to.be.eql({ _id: 42 });
-						callback(null, new Date('2016-05-18T16:00:00Z'));
+						callback(undefined, new Date('2016-05-18T16:00:00Z'));
 					},
 				},
 			})
@@ -61,6 +61,36 @@ describe('getReservation middleware ', function () {
 			resMock,
 			(err) => {
 				expect(err).to.be.eql('dummy error message');
+				expect(resMock.locals).to.be.eql({});
+				done();
+			}
+		);
+	});
+	it('should call next with error when no reservation found in the db', function (done) {
+		const mw = getReservation(
+			(objectrespository = {
+				ReservationModel: {
+					findOne: (param1, callback) => {
+						expect(param1).to.be.eql({ _id: 42 });
+						callback(undefined, null);
+					},
+				},
+			})
+		);
+
+		const resMock = {
+			locals: {},
+		};
+
+		mw(
+			{
+				body: {
+					_id: 42,
+				},
+			},
+			resMock,
+			(err) => {
+				expect(err).to.be.eql(undefined);
 				expect(resMock.locals).to.be.eql({});
 				done();
 			}
